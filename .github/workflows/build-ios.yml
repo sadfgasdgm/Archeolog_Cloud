@@ -12,18 +12,15 @@ jobs:
         with:
           lfs: true
 
-      - name: Activate Unity License
-        uses: game-ci/unity-activate@v1
-        env:
-          UNITY_VERSION: 6000.6.7f1
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-
       - name: Build Unity project
         uses: game-ci/unity-builder@v4
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           unityVersion: 6000.6.7f1
           targetPlatform: iOS
+          allowDirtyBuild: true
 
       - name: Upload Xcode project
         uses: actions/upload-artifact@v4
